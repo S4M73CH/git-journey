@@ -1,0 +1,60 @@
+I'm building a project called Fingest. I've just created a fresh 
+Next.js 15 project with TypeScript, Tailwind, App Router, and the 
+src/ directory using create-next-app. The project is already open 
+in VS Code.
+
+Read the attached spec (Fingest Project Documentation.pdf) but 
+DO NOT build everything yet. We're building in 6 weekly milestones.
+
+For now, I need ONLY the Milestone 1 scaffold: 
+Authentication + Workspace Shell.
+
+Please do the following:
+
+1. Install and configure these dependencies:
+   - drizzle-orm, drizzle-kit, postgres
+   - next-auth@beta (v5 / Auth.js) with Google provider
+   - @ai-sdk/deepseek, ai (Vercel AI SDK)
+   - bullmq, ioredis
+   - @aws-sdk/client-s3
+   Use npm. Do not use pnpm or yarn.
+
+2. Restructure the src/ folder to match section 7 of the spec:
+   src/app/, src/db/, src/lib/, src/hooks/, src/workers/
+
+3. Create src/db/schema.ts with ONLY these two tables for now:
+   - users (id identity PK, email unique, name, created_at)
+   - workspaces (id identity PK, user_id FK, name, description, 
+     created_at)
+   Use integer identity primary keys exactly as the spec requires.
+
+4. Create src/db/index.ts with a Drizzle client using DATABASE_URL.
+
+5. Create drizzle.config.ts at the project root.
+
+6. Create a .env.example file with ALL environment variables from 
+   section 9.5 of the spec, with placeholder values. Also add 
+   GEMINI_API_KEY= as a placeholder.
+
+7. Set up NextAuth (Auth.js v5) with Google OAuth:
+   - Create src/auth.ts with the NextAuth config
+   - Create src/app/api/auth/[...nextauth]/route.ts
+   - Add a database adapter so users are persisted to Postgres
+   - In the signIn callback, after a user signs in for the first 
+     time, automatically create a default workspace named 
+     "My Workspace" for them
+
+8. Create a minimal dashboard page at 
+   src/app/dashboard/workspace/[id]/page.tsx with a two-column 
+   layout:
+   - Left panel: placeholder that says "No documents yet"
+   - Right panel: placeholder that says "Ask a question about 
+     your documents"
+   Use Tailwind. Keep it ugly for now — we'll style it later.
+
+9. Do NOT implement PDF upload, embeddings, chat, or workers yet. 
+   Just the auth + workspace shell.
+
+After you finish, walk me through each file you created or 
+modified and explain what it does. Then STOP so I can test 
+Google sign-in before we move to Milestone 2.
